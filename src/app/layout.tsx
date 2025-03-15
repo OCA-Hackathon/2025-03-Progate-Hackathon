@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import SideBar from "@/app/components/navigation/SideBar";
+import Header from "@/app/components/navigation/Header";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -22,11 +24,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const userPoolId = process.env.COGNITO_USER_POOL_ID!;
+  const clientId = process.env.COGNITO_USER_POOL_CLIENT_ID!;
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Header />
         {children}
       </body>
     </html>
