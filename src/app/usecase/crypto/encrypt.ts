@@ -19,3 +19,4 @@ export function encrypt(text: string): string {
         throw new Error("Encryption failed");
     }
 }
+

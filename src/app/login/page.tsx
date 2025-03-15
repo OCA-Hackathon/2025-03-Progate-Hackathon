@@ -17,7 +17,6 @@ export default function LoginPage() {
       if (nextStep.signInStep === "DONE") {
         setMessage("Login successful!");
 
-        // ✅ ユーザー情報とセッションを取得
         const user = await getCurrentUser();
         const session = await fetchAuthSession({ forceRefresh: true });
 
@@ -25,10 +24,7 @@ export default function LoginPage() {
         console.log("Session:", session);
         const accessToken = session.tokens?.accessToken?.toString();
         if (accessToken) {
-          console.log("Access Token:", accessToken);
 
-          console.log("Sending Access Token to the server...");
-          // ✅ API `/api/auth` に `accessToken` を送信 (サーバーに Cookie 設定を依頼)
           await fetch("/api/auth", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -39,7 +35,6 @@ export default function LoginPage() {
           console.log("Tokens are undefined");
         }
 
-        // ✅ `/home` にリダイレクト
         router.push("/home");
       } else {
         setMessage(`Additional step required: ${nextStep.signInStep}`);
@@ -51,28 +46,61 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white">
-      <h1 className="text-2xl font-bold mb-4">Custom Login</h1>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#1C1C1C] text-white">
+      <div className="w-full max-w-md p-8 rounded-xl bg-[#252525] shadow-2xl border border-[#333333]">
+        <h1 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">Login</h1>
 
-      <input
-        type="text"
-        placeholder="Username"
-        className="border px-4 py-2 mb-2 text-black"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        className="border px-4 py-2 mb-2 text-black"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleSignIn} className="bg-blue-600 px-4 py-2 rounded">
-        Sign In
-      </button>
+        <div className="space-y-6">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Username"
+              className="w-full px-4 py-3 bg-[#1C1C1C] border border-[#333333] rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            </div>
+          </div>
 
-      {message && <p className="mt-4">{message}</p>}
+          <div className="relative">
+            <input
+              type="password"
+              placeholder="Password"
+              className="w-full px-4 py-3 bg-[#1C1C1C] border border-[#333333] rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            </div>
+          </div>
+
+          <button
+            onClick={handleSignIn}
+            className="w-full py-3 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"
+          >
+            Sign In
+          </button>
+
+          <div className="flex items-center justify-between mt-4 text-sm">
+            <div className="flex items-center">
+              <input id="remember-me" type="checkbox" className="h-4 w-4 accent-purple-500 rounded" />
+              <label htmlFor="remember-me" className="ml-2 text-gray-400">Remember me</label>
+            </div>
+            <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors duration-300">Forgot password?</a>
+          </div>
+        </div>
+
+        {message && (
+          <div className="mt-6 py-2 px-4 rounded bg-opacity-20 bg-red-500 text-red-200 text-center">
+            {message}
+          </div>
+        )}
+
+        <div className="mt-8 pt-6 border-t border-[#333333] text-center text-gray-400 text-sm">
+          Don't have an account? <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors duration-300">Sign up</a>
+        </div>
+      </div>
     </div>
   );
 }

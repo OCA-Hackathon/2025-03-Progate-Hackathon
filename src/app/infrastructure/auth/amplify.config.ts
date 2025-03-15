@@ -5,8 +5,8 @@ const awsConfig: ResourcesConfig = {
     Cognito: {
       // userPoolId: process.env.COGNITO_USER_POOL_ID || '',
       // userPoolClientId: process.env.COGNITO_USER_POOL_CLIENT_ID || '',
-      userPoolId: 'XXXXX',
-      userPoolClientId: 'XXXXX',
+      userPoolId: 'xxxxx',
+      userPoolClientId: 'xxxxx',
     },
   },
 };
