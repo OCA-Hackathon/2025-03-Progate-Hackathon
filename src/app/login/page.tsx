@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { getCurrentUser, fetchAuthSession, signIn } from "aws-amplify/auth";
-import "@/app/infrastructure/auth/amplify.config";
+import "@/app/config/AmplifyConf";
+import Button from "@/app/components/ui/Button";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -10,18 +11,16 @@ export default function LoginPage() {
   const [message, setMessage] = useState("");
   const router = useRouter();
 
-  const handleSignIn = async () => {
+  const handleLogin = async () => {
     try {
       const { nextStep } = await signIn({ username, password });
-
       if (nextStep.signInStep === "DONE") {
-        setMessage("Login successful!");
 
-        const user = await getCurrentUser();
+        // const user = await getCurrentUser();
         const session = await fetchAuthSession({ forceRefresh: true });
 
-        console.log("User:", user);
-        console.log("Session:", session);
+        // console.log("User:", user);
+        // console.log("Session:", session);
         const accessToken = session.tokens?.accessToken?.toString();
         if (accessToken) {
 
@@ -30,7 +29,6 @@ export default function LoginPage() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ accessToken }),
           });
-          console.log("Access Token sent to the server.");
         } else {
           console.log("Tokens are undefined");
         }
@@ -75,12 +73,13 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <button
-            onClick={handleSignIn}
+          {/* <button
+            onClick={handleLogin}
             className="w-full py-3 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"
           >
-            Sign In
-          </button>
+            LOGIN
+          </button> */}
+          <Button text="LOGIN" onClick={handleLogin} />
 
           <div className="flex items-center justify-between mt-4 text-sm">
             <div className="flex items-center">
@@ -98,7 +97,7 @@ export default function LoginPage() {
         )}
 
         <div className="mt-8 pt-6 border-t border-[#333333] text-center text-gray-400 text-sm">
-          Don't have an account? <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors duration-300">Sign up</a>
+          Don't have an account? <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors duration-300">Register</a>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import "@/app/infrastructure/auth/amplify.config";
+import "@/app/config/AmplifyConf";
 import VerifyToken from "@/app/home/components/VerifyToken";
 
 
