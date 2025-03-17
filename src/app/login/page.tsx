@@ -2,11 +2,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { fetchAuthSession, signIn } from "aws-amplify/auth";
-import { awsConfig } from "@/app/config/AmplifyConf";
-
 import Button from "@/app/components/ui/Button";
-import { Amplify } from "aws-amplify";
-Amplify.configure(awsConfig);
+
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

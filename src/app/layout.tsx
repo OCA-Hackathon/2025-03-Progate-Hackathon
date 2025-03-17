@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "@/app/config/AmplifyConf"
+import { awsConfig } from "./config/AmplifyConf";
 import Header from "@/app/components/navigation/Header";
 import "./globals.css";
 
@@ -24,6 +24,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  console.log(awsConfig);
   return (
     <html lang="en">
       <body
