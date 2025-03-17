@@ -1,4 +1,4 @@
-import { Amplify, ResourcesConfig } from "aws-amplify";
+import { ResourcesConfig } from "aws-amplify";
 
 const awsConfig: ResourcesConfig = {
   Auth: {
@@ -9,6 +9,4 @@ const awsConfig: ResourcesConfig = {
   },
 };
 
-console.log('awsConfig:', awsConfig);
-
-Amplify.configure(awsConfig);
+export { awsConfig };
