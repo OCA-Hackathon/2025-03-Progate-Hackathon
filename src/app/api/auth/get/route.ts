@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { decrypt } from "@/app/usecase/crypto/decrypt";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
+// import jwkToPem from "jwk-to-pem";
 
 export async function GET(req: NextRequest) {
     // const allCookies = await cookies();
@@ -14,6 +15,9 @@ export async function GET(req: NextRequest) {
 
     // return NextResponse.json({ accessToken: decryptedAccessToken });
 
+    // const cognitoPublicKey: Record<string, string> = {kid:jwkToPem(process.env.COGNITO_PUBLIC_KEY || "")};
+    // console.log('cognito_public_key:', cognitoPublicKey);
+
     try {
         const allCookies = await cookies();
         const accessToken = allCookies.get("accessToken")?.value;
@@ -23,9 +27,7 @@ export async function GET(req: NextRequest) {
             return NextResponse.json({ error: "Unauthorized: No access token found" }, { status: 401 });
         }
 
-        // console.log("Encrypted AccessToken from Cookie:", accessToken);
 
-        // ✅ トークンを復号化
         let decryptedAccessToken;
         try {
             decryptedAccessToken = decrypt(accessToken);
@@ -33,14 +35,17 @@ export async function GET(req: NextRequest) {
             console.error("Token decryption failed:", error);
             return NextResponse.json({ error: "Forbidden: Invalid token" }, { status: 403 });
         }
-        return NextResponse.json({ accessToken: decryptedAccessToken});
+
+        // console.log("署名検証中....");
+        // const verifiedToken = jwt.verify(decryptedAccessToken, cognitoPublicKey.kid, { algorithms: ["RS256"] });
+        // console.log("Verified JWT:", verifiedToken);
+
+        return NextResponse.json({ accessToken: decryptedAccessToken });
     } catch (error) {
         console.error("Internal Server Error:", error);
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }
-
-
 
 
 // export async function GET(req: NextRequest) {

@@ -14,16 +14,16 @@ export default function LoginForm() {
 const handleLogin = async () => {
     try {
       const { nextStep } = await signIn({ username, password });
+      console.log("Next step:", nextStep);
       if (nextStep.signInStep === "DONE") {
 
         // const user = await getCurrentUser();
         const session = await fetchAuthSession({ forceRefresh: true });
 
         // console.log("User:", user);
-        // console.log("Session:", session);
+        console.log("Session:", session);
         const accessToken = session.tokens?.accessToken?.toString();
         if (accessToken) {
-
           await fetch("/api/auth/post", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -90,7 +90,7 @@ const handleLogin = async () => {
   )}
 
   <div className="mt-8 pt-6 border-t border-[#333333] text-center text-gray-400 text-sm">
-    Don't have an account? <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors duration-300">Register</a>
+    Don't have an account? <a href="/register" className="text-purple-400 hover:text-purple-300 transition-colors duration-300">Register</a>
   </div>
 </div>
 </div>
