@@ -4,24 +4,18 @@ import { signOut, fetchAuthSession } from "aws-amplify/auth";
 import { useRouter } from "next/navigation";
 import { Bell, Settings, User } from "lucide-react";
 
-const menuItems = [
-    { name: "Bell", icon: Bell, path: "/notification" },
-    { name: "Settings", icon: Settings, path: "/settings" },
-    { name: "Profile", icon: User, path: "/profile" },
-  ];
 
 export default function Profile() {
     const router = useRouter();
-    const [isLogin, setIsLogin] = useState(false);
+    const [isLogin, setIsLogin] = useState<boolean | null>(null);
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
 
-    // 認証セッションを確認して isLogin を更新
     useEffect(() => {
         const checkAuth = async () => {
             try {
                 const session = await fetchAuthSession();
-                if (session) {
+                if (session.tokens?.accessToken.toString()) {
                     setIsLogin(true);
                 }
             } catch (error) {
@@ -33,7 +27,6 @@ export default function Profile() {
         checkAuth();
     }, []);
 
-    // 外部クリックでメニューを閉じる処理
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
             if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
