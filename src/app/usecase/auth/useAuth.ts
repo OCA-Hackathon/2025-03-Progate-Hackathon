@@ -1,7 +1,7 @@
 export async function verifyToken() {
     try {
         console.log("Fetching accessToken from /api/auth...");
-        const response = await fetch("/api/auth", {
+        const response = await fetch("/api/auth/get", {
             method: "GET",
             credentials: "include",
         });

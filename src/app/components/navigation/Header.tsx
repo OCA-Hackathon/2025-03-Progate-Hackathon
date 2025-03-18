@@ -34,7 +34,7 @@ export default function Header() {
 
     return (
         <header className="w-full h-16 bg-primary text-white flex items-center justify-between px-6 shadow-md relative">
-            <h1 className="text-lg font-bold">Code Arena</h1>
+            <h1 className="text-lg font-bold">RaidersALG</h1>
               <div className="relative" ref={menuRef}>
                   <button onClick={() => setIsOpen(!isOpen)} className="flex items-center space-x-2">
                       <User size={24} className="cursor-pointer" />
