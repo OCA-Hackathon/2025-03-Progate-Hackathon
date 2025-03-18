@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "@/app/config/AmplifyConf"
+// import "@/app/config/AmplifyConf"
 import Header from "@/app/components/navigation/Header";
 import "./globals.css";
+import ClientProvider from "@/app/config/amplify/ClientProvider";
+import { configureAmplify } from "@/app/config/amplify/AmplifyConf";
+import { AuthConfig } from "@/app/types/amplify/types";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,13 +28,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const authConfig: AuthConfig = {
+    userPoolId: process.env.COGNITO_USER_POOL_ID || "",
+    userPoolClientId: process.env.COGNITO_USER_POOL_CLIENT_ID || "",
+  };
+  // console.log(authConfig);
+  configureAmplify(authConfig);
+
   return (
-    <html lang="en">
+    <html lang="ja">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
-        {children}
+        <ClientProvider authConfig={authConfig}>
+          <Header />
+          {children}
+        </ClientProvider>
       </body>
     </html>
   );

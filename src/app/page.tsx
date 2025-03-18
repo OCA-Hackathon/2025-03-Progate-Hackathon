@@ -31,7 +31,7 @@ export default function Home() {
 
         <h1 className="text-6xl sm:text-7xl font-extrabold text-center mb-8 tracking-tight">
           <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-500 to-purple-400">
-            Code Arena
+            RaidersALG
           </span>
         </h1>
         <div className="w-20 h-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mb-8"></div>
@@ -43,7 +43,7 @@ export default function Home() {
         </p>
 
         <p className="text-lg text-gray-400 text-center max-w-xl mb-10">
-          Code Arena is a platform for coders to practice their skills, compete with others, and push your limits.
+          RaidersALG is a platform for coders to practice their skills, compete with others, and push your limits.
         </p>
 
         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
