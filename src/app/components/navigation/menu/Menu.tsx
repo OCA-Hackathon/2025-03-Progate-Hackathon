@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { signOut } from "aws-amplify/auth";
 import { useRouter, usePathname } from "next/navigation";
-import { Bell, Settings, User } from "lucide-react";
+import { Bell, User } from "lucide-react";
 import { useAuth } from "@/app/config/amplify/AuthProvider";
 
 
@@ -73,9 +73,9 @@ export default function Profile() {
                             <User size={24} className="cursor-pointer" />
                         </button>
 
-                        <button className="items-center space-x-2">
+                        {/* <button className="items-center space-x-2">
                             <Settings size={24} className="cursor-pointer" />
-                        </button>
+                        </button> */}
                     </div>
 
                     {isOpen && (

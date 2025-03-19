@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Header from "@/app/components/navigation/Header";
+import Footer from "@/app/components/navigation/Footer";
 import "./globals.css";
 import ClientProvider from "@/app/config/amplify/ClientProvider";
 import { configureAmplify } from "@/app/config/amplify/AmplifyConf";
@@ -44,6 +45,7 @@ export default function RootLayout({
             <Header />
             {children}
           </AuthProvider>
+          <Footer />
         </ClientProvider>
       </body>
     </html>
