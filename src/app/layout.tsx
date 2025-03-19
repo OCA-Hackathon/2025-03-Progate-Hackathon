@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-// import "@/app/config/AmplifyConf"
 import Header from "@/app/components/navigation/Header";
 import "./globals.css";
 import ClientProvider from "@/app/config/amplify/ClientProvider";

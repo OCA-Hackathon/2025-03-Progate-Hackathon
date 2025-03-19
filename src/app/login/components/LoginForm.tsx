@@ -21,7 +21,7 @@ const handleLogin = async () => {
         const session = await fetchAuthSession({ forceRefresh: true });
 
         // console.log("User:", user);
-        console.log("Session:", session);
+        // console.log("Session:", session);
         const accessToken = session.tokens?.accessToken?.toString();
         if (accessToken) {
           await fetch("/api/auth/post", {
@@ -32,7 +32,6 @@ const handleLogin = async () => {
         } else {
           console.log("Tokens are undefined");
         }
-
         router.push("/home");
       } else {
         setMessage(`Additional step required: ${nextStep.signInStep}`);

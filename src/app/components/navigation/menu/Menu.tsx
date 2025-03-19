@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { signOut, fetchAuthSession } from "aws-amplify/auth";
+import { signOut } from "aws-amplify/auth";
 import { useRouter } from "next/navigation";
 import { Bell, Settings, User } from "lucide-react";
 
@@ -14,10 +14,15 @@ export default function Profile() {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const session = await fetchAuthSession();
-                if (session.tokens?.accessToken.toString()) {
-                    setIsLogin(true);
-                }
+              const response = await fetch("/api/auth/get", {
+                  method: "GET",
+                  credentials: "include",
+              });
+              if (response.ok) {
+                  setIsLogin(true);
+              }else{
+                  setIsLogin(false);
+              }
             } catch (error) {
                 console.error("Error fetching auth session:", error);
                 setIsLogin(false);
