@@ -16,6 +16,7 @@ export async function GET(req: NextRequest) {
     // return NextResponse.json({ accessToken: decryptedAccessToken });
 
     // const cognitoPublicKey: Record<string, string> = {kid:jwkToPem(process.env.COGNITO_PUBLIC_KEY || "")};
+    const cognitoPublicKey = process.env.COGNITO_PUBLIC_KEY;
     // console.log('cognito_public_key:', cognitoPublicKey);
 
     try {
@@ -36,8 +37,15 @@ export async function GET(req: NextRequest) {
             return NextResponse.json({ error: "Forbidden: Invalid token" }, { status: 403 });
         }
 
+        const decodedToken = jwt.decode(decryptedAccessToken);
+        // console.log(decodedToken);
+
         // console.log("署名検証中....");
-        // const verifiedToken = jwt.verify(decryptedAccessToken, cognitoPublicKey.kid, { algorithms: ["RS256"] });
+        // if (!cognitoPublicKey) {
+        //     console.error("Cognito public key is undefined");
+        //     return NextResponse.json({ error: "Internal Server Error: Missing public key" }, { status: 500 });
+        // }
+        // const verifiedToken = jwt.verify(decryptedAccessToken, cognitoPublicKey, { algorithms: ["RS256"] });
         // console.log("Verified JWT:", verifiedToken);
 
         return NextResponse.json({ accessToken: decryptedAccessToken });
