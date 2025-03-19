@@ -14,7 +14,7 @@ export default function LoginForm() {
 const handleLogin = async () => {
     try {
       const { nextStep } = await signIn({ username, password });
-      console.log("Next step:", nextStep);
+      // console.log("Next step:", nextStep);
       if (nextStep.signInStep === "DONE") {
 
         // const user = await getCurrentUser();
@@ -23,6 +23,9 @@ const handleLogin = async () => {
         // console.log("User:", user);
         // console.log("Session:", session);
         const accessToken = session.tokens?.accessToken?.toString();
+        const idToken = session.tokens?.idToken?.toString();
+        // console.log("idToken:", idToken);
+        // console.log("accessToken:", accessToken);
         if (accessToken) {
           await fetch("/api/auth/post", {
             method: "POST",
@@ -38,7 +41,7 @@ const handleLogin = async () => {
       }
     } catch (error) {
       console.error("Sign in error:", error);
-      setMessage("Login failed.");
+      setMessage("Invalid username or password");
     }
   };
   return (
@@ -46,6 +49,11 @@ const handleLogin = async () => {
 <div className="w-full max-w-md p-8 rounded-xl bg-[#252525] shadow-2xl border border-[#333333]">
   <h1 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">Login</h1>
 
+  {message && (
+    <div className="py-2 px-4 text-red-500 text-center">
+      {message}
+    </div>
+  )}
   <div className="space-y-6">
     <div className="relative">
       <input
@@ -81,12 +89,6 @@ const handleLogin = async () => {
       <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors duration-300">Forgot password?</a>
     </div>
   </div>
-
-  {message && (
-    <div className="mt-6 py-2 px-4 rounded bg-opacity-20 bg-red-500 text-red-200 text-center">
-      {message}
-    </div>
-  )}
 
   <div className="mt-8 pt-6 border-t border-[#333333] text-center text-gray-400 text-sm">
     Don't have an account? <a href="/register" className="text-purple-400 hover:text-purple-300 transition-colors duration-300">Register</a>

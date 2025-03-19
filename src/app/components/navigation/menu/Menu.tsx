@@ -1,36 +1,40 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { signOut } from "aws-amplify/auth";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Bell, Settings, User } from "lucide-react";
+import { useAuth } from "@/app/config/amplify/AuthProvider";
 
 
 export default function Profile() {
     const router = useRouter();
-    const [isLogin, setIsLogin] = useState<boolean | null>(null);
+    const pathname = usePathname();
+    const { isLogin } = useAuth();
+    // const [isLogin, setIsLogin] = useState<boolean | null>(null);
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
+    // console.log("isLogin:", isLogin);
 
-    useEffect(() => {
-        const checkAuth = async () => {
-            try {
-              const response = await fetch("/api/auth/get", {
-                  method: "GET",
-                  credentials: "include",
-              });
-              if (response.ok) {
-                  setIsLogin(true);
-              }else{
-                  setIsLogin(false);
-              }
-            } catch (error) {
-                console.error("Error fetching auth session:", error);
-                setIsLogin(false);
-            }
-        };
+    // useEffect(() => {
+    //     const checkAuth = async () => {
+    //         try {
+    //           const response = await fetch("/api/auth/get", {
+    //               method: "GET",
+    //               credentials: "include",
+    //           });
+    //           if (response.ok) {
+    //               setIsLogin(true);
+    //           }else{
+    //               setIsLogin(false);
+    //           }
+    //         } catch (error) {
+    //             console.error("Error fetching auth session:", error);
+    //             setIsLogin(false);
+    //         }
+    //     };
 
-        checkAuth();
-    }, []);
+    //     checkAuth();
+    // }, [pathname]);
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -50,7 +54,7 @@ export default function Profile() {
         try {
             await signOut();
             await fetch("/api/logout", { method: "POST" });
-            setIsLogin(false);
+            // setIsLogin(false);
             router.push("/login");
         } catch (error) {
             console.error("Sign out error:", error);
