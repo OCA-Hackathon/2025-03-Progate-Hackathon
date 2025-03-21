@@ -48,7 +48,7 @@ const handleLogin = async () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#1C1C1C] text-white">
 <div className="w-full max-w-md p-8 rounded-xl bg-[#252525] shadow-2xl border border-[#333333]">
-  <h1 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">Login</h1>
+  <h1 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">LOGIN</h1>
 
   {message && (
     <div className="py-2 px-4 text-red-500 text-center">
@@ -80,7 +80,7 @@ const handleLogin = async () => {
       </div>
     </div>
 
-    <Button text="LOGIN" onClick={handleLogin} />
+    <Button onClick={handleLogin}>LOGIN</Button>
 
     <div className="flex items-center justify-between mt-4 text-sm">
       <div className="flex items-center">

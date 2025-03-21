@@ -46,7 +46,7 @@ export default function RegisterForm() {
       </div>
     </div>
 
-    <Button text="REGISTER" onClick={handleRegister} />
+    <Button onClick={handleRegister}>REGISTER</Button>
   </div>
 
   {message && (

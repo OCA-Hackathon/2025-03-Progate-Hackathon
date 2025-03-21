@@ -5,7 +5,7 @@ import Link from 'next/link';
 export default function Header() {
     return (
         <header className="w-full h-16 bg-primary text-white flex items-center justify-between px-6 shadow-md relative">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 ml-3">
               <SideBar/>
               <Link
               href="/home"
