@@ -22,9 +22,11 @@ async function streamToString(stream: any): Promise<string> {
 export async function POST(req: NextRequest) {
   try {
     const { username, problemId } = await req.json();
+    const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+    // await delay(60000);
+
     let attempts = 0;
     const maxAttempts = 5;
-    const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
     console.log("Request:", { username, problemId });
 
     const input = {

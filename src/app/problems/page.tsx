@@ -4,7 +4,7 @@ import { Crosshair } from "lucide-react";
 export default function ProblemsPage() {
   // 20個のダミー問題データ
   const problems = [
-    { id: "1", title: "Two Sum Problem" },
+    { id: "100", title: "Two Sum Problem" },
     { id: "2", title: "Dijkstra's Algorithm" },
     { id: "3", title: "Knapsack Problem" },
     { id: "4", title: "Floyd-Warshall Algorithm" },
