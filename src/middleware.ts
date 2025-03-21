@@ -3,6 +3,10 @@ import type { NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
   const accessToken = request.cookies.get('accessToken');
+  if (!accessToken) {
+    return NextResponse
+      .json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
   // 現在のパスを取得
   const { pathname } = request.nextUrl;
@@ -12,17 +16,21 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-
-  if ((pathname === '/home' || pathname.startsWith('/home/')) && !accessToken) {
+  if (!accessToken) {
     const loginUrl = new URL('/login', request.url);
-
     loginUrl.searchParams.set('redirect', pathname);
     return NextResponse.redirect(loginUrl);
   }
+  // if ((pathname === '/home' || pathname.startsWith('/home/')) && !accessToken) {
+  //   const loginUrl = new URL('/login', request.url);
+
+  //   loginUrl.searchParams.set('redirect', pathname);
+  //   return NextResponse.redirect(loginUrl);
+  // }
   return NextResponse.next();
 }
 
 // 特定のパスに対してのみミドルウェアを実行するように設定
 export const config = {
-  matcher: ['/home', '/home/:path*', '/login'],
+  matcher: ['/home', '/home/:path*', '/problems', '/problems/:path*'],
 };

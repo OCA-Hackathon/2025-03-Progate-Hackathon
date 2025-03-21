@@ -54,10 +54,12 @@ export default function Sidebar() {
                 router.push(path);
                 setIsOpen(false);
               }}
-              className="flex items-center space-x-3 w-full p-3 rounded-lg hover:bg-primary transition"
+              className="group flex items-center space-x-3 w-full p-3 hover:bg-primary rounded-lg  transition"
             >
-              <Icon size={24} />
-              <span>{name}</span>
+            <Icon size={24} />
+
+              <span className="transition-all bg-gradient-to-r bg-clip-text from-white to-white text-transparent group-hover:from-purple-400 group-hover:to-blue-500">{name}</span>
+              {/* <span>{name}</span> */}
             </button>
           ))}
         </nav>

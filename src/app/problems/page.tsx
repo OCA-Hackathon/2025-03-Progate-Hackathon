@@ -48,7 +48,7 @@ export default function ProblemsPage() {
 
               {/* 内側のコンテンツ */}
               <div className="relative bg-[#1c1c1c] p-6 rounded-lg shadow-lg z-10">
-                <h2 className="text-lg font-semibold transition-all bg-gradient-to-r from-white to-white bg-clip-text text-transparent 
+                <h2 className="text-lg font-semibold transition-all bg-gradient-to-r from-white to-white bg-clip-text text-transparent
                               group-hover:from-purple-400 group-hover:to-blue-500">
                   {problem.title}
                 </h2>

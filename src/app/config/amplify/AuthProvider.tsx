@@ -26,7 +26,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const data = await response.json();
       setIsLogin(response.ok);
       const decodedToken = jwt.decode(data.accessToken);
-      console.log("Decoded token:", decodedToken);
+      // console.log("Decoded token:", decodedToken);
       if (typeof decodedToken !== "string" && decodedToken?.username) {
         setUsername(decodedToken.username);
       }

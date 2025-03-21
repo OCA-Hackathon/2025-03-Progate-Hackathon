@@ -15,27 +15,6 @@ export default function Profile() {
     const menuRef = useRef<HTMLDivElement | null>(null);
     // console.log("isLogin:", isLogin);
 
-    // useEffect(() => {
-    //     const checkAuth = async () => {
-    //         try {
-    //           const response = await fetch("/api/auth/get", {
-    //               method: "GET",
-    //               credentials: "include",
-    //           });
-    //           if (response.ok) {
-    //               setIsLogin(true);
-    //           }else{
-    //               setIsLogin(false);
-    //           }
-    //         } catch (error) {
-    //             console.error("Error fetching auth session:", error);
-    //             setIsLogin(false);
-    //         }
-    //     };
-
-    //     checkAuth();
-    // }, [pathname]);
-
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
             if (menuRef.current && !menuRef.current.contains(event.target as Node)) {

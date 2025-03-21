@@ -2,7 +2,7 @@
 import Button from "@/app/components/ui/Button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { fetchAuthSession, signIn } from "aws-amplify/auth";
+import { fetchAuthSession, signIn, signOut } from "aws-amplify/auth";
 
 export default function LoginForm() {
 
@@ -13,6 +13,7 @@ export default function LoginForm() {
 
 const handleLogin = async () => {
     try {
+      await signOut();
       const { nextStep } = await signIn({ username, password });
       // console.log("Next step:", nextStep);
       if (nextStep.signInStep === "DONE") {

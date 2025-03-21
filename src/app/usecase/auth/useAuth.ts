@@ -1,21 +1,21 @@
-export async function verifyToken() {
-    try {
-        // console.log("Fetching accessToken from /api/auth...");
-        const response = await fetch("/api/auth/get", {
-            method: "GET",
-            credentials: "include",
-        });
+// export async function verifyToken() {
+//     try {
+//         // console.log("Fetching accessToken from /api/auth...");
+//         const response = await fetch("/api/auth/get", {
+//             method: "GET",
+//             credentials: "include",
+//         });
 
-        if (!response.ok) {
-            console.error("Failed to fetch token, Status:", response.status);
-            return false;
-        }
+//         if (!response.ok) {
+//             console.error("Failed to fetch token, Status:", response.status);
+//             return false;
+//         }
 
-        const data = await response.json();
+//         const data = await response.json();
 
-        return data.accessToken;
-    } catch (error) {
-        console.error("Token validation failed:", error);
-        return false;
-    }
-}
+//         return data.accessToken;
+//     } catch (error) {
+//         console.error("Token validation failed:", error);
+//         return false;
+//     }
+// }

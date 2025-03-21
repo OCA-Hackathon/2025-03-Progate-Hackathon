@@ -1,0 +1,83 @@
+import { NextRequest, NextResponse } from "next/server";
+import { S3Client, ListObjectsV2Command, GetObjectCommand } from "@aws-sdk/client-s3";
+
+const client = new S3Client({
+    region: process.env.REGION || "",
+    credentials: {
+        accessKeyId: process.env.ACCESS_KEY || "",
+        secretAccessKey: process.env.SECRET_ACCESS_KEY || "",
+    }
+});
+const S3_BUCKET_NAME = process.env.S3_BUCKET_NAME || "";
+
+// S3 のレスポンス Body → string に変換
+async function streamToString(stream: any): Promise<string> {
+  const chunks: Uint8Array[] = [];
+  for await (const chunk of stream) {
+    chunks.push(chunk);
+  }
+  return Buffer.concat(chunks).toString("utf-8");
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const { username, problemId } = await req.json();
+    let attempts = 0;
+    const maxAttempts = 5;
+    const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+    console.log("Request:", { username, problemId });
+
+    const input = {
+      Bucket: S3_BUCKET_NAME,
+      Prefix: `results/${username}/${problemId}/`,
+      MaxKeys: 50,
+    };
+
+    while (attempts < maxAttempts) {
+      attempts++;
+      console.log(`Polling attempt ${attempts}/${maxAttempts}`);
+      const command = new ListObjectsV2Command(input);
+      const response = await client.send(command);
+
+      if (response.Contents && response.Contents.length > 0) {
+        const resultFiles = response.Contents
+          .filter((item) => item.Key && !item.Key.endsWith('/latest.json'))
+          .sort(
+            (a, b) =>
+              new Date(b.LastModified || 0).getTime() -
+              new Date(a.LastModified || 0).getTime()
+          );
+
+        if (resultFiles.length > 0) {
+          const latestFile = resultFiles[0];
+          console.log(`Found file: ${latestFile.Key}`);
+
+          const getCommand = new GetObjectCommand({
+            Bucket: S3_BUCKET_NAME,
+            Key: latestFile.Key!,
+          });
+          const getResponse = await client.send(getCommand);
+          const bodyString = await streamToString(getResponse.Body);
+
+          const result = JSON.parse(bodyString || "{}");
+          console.log("Parsed result:", result);
+
+          return NextResponse.json({ success: true, result });
+        }
+      }
+
+      await delay(2000);
+    }
+
+    return NextResponse.json(
+      { success: false, message: "Timed out waiting for result." },
+      { status: 202 }
+    );
+  } catch (error) {
+    console.error("Error retrieving result:", error);
+    return NextResponse.json(
+      { error: "Failed to retrieve results" },
+      { status: 500 }
+    );
+  }
+}

@@ -37,13 +37,13 @@ export default function RankingPage({ setUserRank }: { setUserRank: (rank: strin
     const chartInstance = echarts.init(chartRef.current);
 
     const backgroundBands = [
-      { min: 0, max: 500, color: "rgba(220, 220, 220, 0.4)" },
-      { min: 500, max: 1000, color: "rgba(57, 255, 20, 0.4)" },
-      { min: 1000, max: 1500, color: "rgba(0, 255, 255, 0.4)" },
-      { min: 1500, max: 2000, color: "rgba(30, 144, 255, 0.4)" },
-      { min: 2000, max: 2500, color: "rgba(255, 215, 0, 0.4)" },
-      { min: 2500, max: 3000, color: "rgba(255, 97, 3, 0.4)" },
-      { min: 3000, max: 4000, color: "rgba(255, 0, 0, 0.4)" },
+      { min: 0, max: 499, color: "rgba(220, 220, 220, 0.8)" },
+      { min: 500, max: 999, color: "rgba(57, 255, 20, 0.8)" },
+      { min: 1000, max: 1499, color: "rgba(0, 255, 255, 0.8)" },
+      { min: 1500, max: 1999, color: "rgba(30, 144, 255, 0.8)" },
+      { min: 2000, max: 2999, color: "rgba(255, 215, 0, 0.8)" },
+      { min: 3000, max: 3999, color: "rgba(255, 97, 3, 0.8)" },
+      { min: 4000, max: 4000, color: "rgba(255, 0, 0, 0.8)" },
     ];
 
     setUserRank(userRank);
@@ -67,7 +67,7 @@ export default function RankingPage({ setUserRank }: { setUserRank: (rank: strin
       yAxis: {
         type: "value",
         min: 0,
-        max: 3500,
+        max: 4000,
         interval: 1000,
         axisLabel: { color: "#fff", fontSize: 12 },
         splitLine: { lineStyle: { color: "#333" } },
