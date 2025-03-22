@@ -1,5 +1,5 @@
-import Menu from "@/app/components/navigation/menu/Menu";
-import SideBar from "@/app/components/navigation/SideBar";
+import Menu from "@/app/feature/header/components/navigation/ProfileMenu";
+import SideBar from "@/app/feature/header/components/navigation/SideBar";
 import Link from "next/link";
 
 export default function Header() {

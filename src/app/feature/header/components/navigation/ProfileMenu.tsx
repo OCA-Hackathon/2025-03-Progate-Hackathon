@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Bell, User } from "lucide-react";
 import { useAuth } from "@/app/config/amplify/AuthProvider";
 
-export default function Profile() {
+export default function ProfileMenu() {
   const router = useRouter();
   const { isLogin } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
