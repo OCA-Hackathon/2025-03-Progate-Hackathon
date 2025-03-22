@@ -33,7 +33,6 @@ export default function RootLayout({
     userPoolClientId: process.env.HACKATHON_COGNITO_USER_POOL_CLIENT_ID || "",
   };
 
-  // console.log(authConfig);
   configureAmplify(authConfig);
 
   return (

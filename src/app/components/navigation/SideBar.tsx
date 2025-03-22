@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, Home, Settings, Trophy, Crosshair, Flag } from "lucide-react";
