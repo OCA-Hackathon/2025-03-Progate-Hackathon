@@ -2,13 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { S3Client, ListObjectsV2Command, GetObjectCommand } from "@aws-sdk/client-s3";
 
 const client = new S3Client({
-    region: process.env.REGION || "",
+    region: process.env.HACKATHON_AWS_DEFAULT_REGION || "",
     credentials: {
-        accessKeyId: process.env.ACCESS_KEY || "",
-        secretAccessKey: process.env.SECRET_ACCESS_KEY || "",
+        accessKeyId: process.env.HACKATHON_AWS_ACCESS_KEY_ID || "",
+        secretAccessKey: process.env.HACKATHON_AWS_SECRET_ACCESS_KEY || "",
+        sessionToken: process.env.HACKATHON_AWS_SESSION_TOKEN || "",
     }
 });
-const S3_BUCKET_NAME = process.env.S3_BUCKET_NAME || "";
+const S3_BUCKET_NAME = process.env.HACKATHON_S3_BUCKET_NAME || "";
 
 // S3 のレスポンス Body → string に変換
 async function streamToString(stream: any): Promise<string> {

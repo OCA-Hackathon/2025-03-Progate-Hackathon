@@ -2,13 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { SendMessageCommand, SQSClient } from "@aws-sdk/client-sqs";
 
 const client = new SQSClient({
-    region: process.env.REGION || "",
+    region: process.env.HACKATHON_AWS_DEFAULT_REGION || "",
     credentials: {
-        accessKeyId: process.env.ACCESS_KEY || "",
-        secretAccessKey: process.env.SECRET_ACCESS_KEY || "",
+        accessKeyId: process.env.HACKATHON_AWS_ACCESS_KEY_ID || "",
+        secretAccessKey: process.env.HACKATHON_AWS_SECRET_ACCESS_KEY || "",
+        sessionToken: process.env.HACKATHON_AWS_SESSION_TOKEN || "",
     }
 });
-const SQS_QUEUE_NAME = process.env.SQS_QUEUE_URL || "";
+const SQS_QUEUE_NAME = process.env.HACKATHON_SQS_QUEUE_URL || "";
+
 
 export async function POST(req: NextRequest) {
   try {

@@ -8,10 +8,10 @@ interface UploadCodeProps {
 }
 
 export default async function UploadCode({ userId, problemId, code, language }: UploadCodeProps) {
-    const bucket = process.env.BUCKET_NAME || '';
-    const region = process.env.REGION || '';
-    const accessKey = process.env.ACCESS_KEY || '';
-    const secretAccessKey = process.env.SECRET_ACCESS_KEY || '';
+    const bucket = process.env.HACKATHON_S3_BUCKET_NAME || '';
+    const region = process.env.HACKATHON_AWS_DEFAULT_REGION || '';
+    const accessKey = process.env.HACKATHON_AWS_ACCESS_KEY_ID || '';
+    const secretAccessKey = process.env.HACKATHON_AWS_SECRET_ACCESS_KEY || '';
 
     AWS.config.update({
         region: region,

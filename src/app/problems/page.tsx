@@ -1,29 +1,37 @@
 import Link from "next/link";
 import { Crosshair } from "lucide-react";
+import DifficultyBadge from "@/app/problems/components//DifficultyBadge";
+import RatingBadge from "@/app/problems/components//RatingBadge";
+
+interface Problem {
+  id: string;
+  title: string;
+  difficulty: string;
+  rating: number;
+}
 
 export default function ProblemsPage() {
-  // 20個のダミー問題データ
-  const problems = [
-    { id: "100", title: "Two Sum Problem" },
-    { id: "2", title: "Dijkstra's Algorithm" },
-    { id: "3", title: "Knapsack Problem" },
-    { id: "4", title: "Floyd-Warshall Algorithm" },
-    { id: "5", title: "Bellman-Ford Algorithm" },
-    { id: "6", title: "Prim's Minimum Spanning Tree" },
-    { id: "7", title: "Kruskal's Algorithm" },
-    { id: "8", title: "Topological Sorting" },
-    { id: "9", title: "Depth First Search (DFS)" },
-    { id: "10", title: "Breadth First Search (BFS)" },
-    { id: "11", title: "Binary Search" },
-    { id: "12", title: "Longest Common Subsequence" },
-    { id: "13", title: "Edit Distance" },
-    { id: "14", title: "Maximum Subarray (Kadane's Algorithm)" },
-    { id: "15", title: "Segment Tree Basics" },
-    { id: "16", title: "Trie Data Structure" },
-    { id: "17", title: "Union-Find Disjoint Sets" },
-    { id: "18", title: "Convex Hull Algorithm" },
-    { id: "19", title: "Bitmask Dynamic Programming" },
-    { id: "20", title: "Graph Coloring Algorithm" },
+  const problems: Problem[] = [
+    { id: "100", title: "Two Sum Problem", difficulty: "easy", rating: 5 },
+    { id: "2", title: "Dijkstra's Algorithm", difficulty: "medium", rating: 4 },
+    { id: "3", title: "Knapsack Problem", difficulty: "medium", rating: 3 },
+    { id: "4", title: "Floyd-Warshall Algorithm", difficulty: "medium", rating: 3 },
+    { id: "5", title: "Bellman-Ford Algorithm", difficulty: "medium", rating: 4 },
+    { id: "6", title: "Prim's Minimum Spanning Tree", difficulty: "medium", rating: 2 },
+    { id: "7", title: "Kruskal's Algorithm", difficulty: "medium", rating: 4 },
+    { id: "8", title: "Topological Sorting", difficulty: "medium", rating: 5 },
+    { id: "9", title: "Depth First Search (DFS)", difficulty: "easy", rating: 4 },
+    { id: "10", title: "Breadth First Search (BFS)", difficulty: "easy", rating: 3 },
+    { id: "11", title: "Binary Search", difficulty: "easy", rating: 4 },
+    { id: "12", title: "Longest Common Subsequence", difficulty: "medium", rating: 3 },
+    { id: "13", title: "Edit Distance", difficulty: "medium", rating: 2 },
+    { id: "14", title: "Maximum Subarray (Kadane's Algorithm)", difficulty: "easy", rating: 4 },
+    { id: "15", title: "Segment Tree Basics", difficulty: "hard", rating: 4 },
+    { id: "16", title: "Trie Data Structure", difficulty: "medium", rating: 2 },
+    { id: "17", title: "Union-Find Disjoint Sets", difficulty: "medium", rating: 4 },
+    { id: "18", title: "Convex Hull Algorithm", difficulty: "hard", rating: 2 },
+    { id: "19", title: "Bitmask Dynamic Programming", difficulty: "hard", rating: 1 },
+    { id: "20", title: "Graph Coloring Algorithm", difficulty: "hard", rating: 3 },
   ];
 
   return (
@@ -52,7 +60,11 @@ export default function ProblemsPage() {
                               group-hover:from-purple-400 group-hover:to-blue-500">
                   {problem.title}
                 </h2>
-                <p className="text-gray-400 text-sm">ID: {problem.id}</p>
+                {/* <p className="text-gray-400 text-sm">ID: {problem.id}</p> */}
+                <div className="absolute top-1 right-1">
+                  <RatingBadge rating={problem.rating} />
+                </div>
+                {/* <DifficultyBadge difficulty={problem.difficulty} /> */}
               </div>
             </Link>
           ))}

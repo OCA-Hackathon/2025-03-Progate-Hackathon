@@ -29,9 +29,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const authConfig: AuthConfig = {
-    userPoolId: process.env.COGNITO_USER_POOL_ID || "",
-    userPoolClientId: process.env.COGNITO_USER_POOL_CLIENT_ID || "",
+    userPoolId: process.env.HACKATHON_COGNITO_USER_POOL_ID || "",
+    userPoolClientId: process.env.HACKATHON_COGNITO_USER_POOL_CLIENT_ID || "",
   };
+
   // console.log(authConfig);
   configureAmplify(authConfig);
 

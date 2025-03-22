@@ -15,7 +15,7 @@ export default function ProblemDetail() {
                     2つの整数が与えられるので、それらの合計を求めて出力してください。
                 </p>
                 <p className="mb-4">
-                    例えば、入力が <strong>2 7</strong> の場合、出力は <strong>9</strong> となります。
+                    例えば、<strong>A=2, B=7</strong> の場合、出力は <strong>9</strong> となります。
                 </p>
             </div>
 
@@ -35,7 +35,7 @@ export default function ProblemDetail() {
             <div className="mb-6">
                 <h3 className="font-semibold mb-2">制約</h3>
                 <ul className="text-sm text-gray-300 space-y-1">
-                    <li>-10<sup>9</sup> ≤ A<sub>1</sub>, A<sub>2</sub> ≤ 10<sup>9</sup></li>
+                    <li>-10<sup>9</sup> ≤ A<sub></sub>, B ≤ 10<sup>9</sup></li>
                     <li>入力される値はすべて整数</li>
                 </ul>
             </div>

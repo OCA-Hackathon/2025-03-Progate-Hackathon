@@ -124,6 +124,7 @@ export default function Code({ problemId }: CodeProps) {
       if (response.ok) {
         console.log('Fetching results successfully');
         const data = await response.json();
+        console.log('Data:', data);
         const result = data.result;
         setResult(result);
         console.log('Result:', result);
