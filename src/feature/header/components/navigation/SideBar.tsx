@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useAuth } from "@/app/config/amplify/AuthProvider";
-import SidebarMenu from "@/app/feature/header/components/navigation/SidebarMenu";
+import SidebarMenu from "@/feature/header/components/navigation/SidebarMenu";
 
 export default function Sidebar() {
   const { isLogin } = useAuth();
@@ -35,7 +35,7 @@ export default function Sidebar() {
 
         {/* メニューリスト */}
         <nav className="space-y-4 bt-6">
-          <SidebarMenu />
+          <SidebarMenu setIsOpen={setIsOpen}/>
         </nav>
       </motion.div>
     </>

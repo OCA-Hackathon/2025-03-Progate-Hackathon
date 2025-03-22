@@ -1,16 +1,17 @@
 import { useRouter } from "next/navigation";
 import { menuItems } from "@/config/sidebar/navigation";
-export default function SidebarMenu(){
+export default function SidebarMenu({setIsOpen}:{setIsOpen:(isOpen:boolean)=>void}) {
   const router = useRouter();
-  console.log(menuItems);
+  const handleGoMenu = (path: string) => {
+    router.push(path);
+    setIsOpen(false);
+  };
   return (
     <>
       {menuItems.map(({ name, icon: Icon, path }) => (
         <button
           key={name}
-          onClick={() => {
-            router.push(path);
-          }}
+          onClick={()=>{handleGoMenu(path)}}
           className="group flex items-center space-x-3 w-5/6 p-3 hover:bg-primary rounded-lg transition"
         >
           <Icon size={24} />
