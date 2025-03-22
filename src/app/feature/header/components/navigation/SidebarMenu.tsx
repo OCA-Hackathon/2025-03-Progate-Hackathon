@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import { menuItems } from "@/config/navigation";
+import { menuItems } from "@/config/sidebar/navigation";
 export default function SidebarMenu(){
   const router = useRouter();
   console.log(menuItems);
