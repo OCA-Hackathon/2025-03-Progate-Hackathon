@@ -10,7 +10,6 @@ export default function RegisterForm() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState<"success" | "error" | "">("");
-  const router = useRouter();
 
   const handleRegister = async () => {
     console.log("Registering...");
