@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Button from "@/app/components/ui/Button";
 import { useAuth } from "@/app/config/amplify/AuthProvider";
 import Editor from "@monaco-editor/react";
@@ -35,25 +35,6 @@ export default function Code({ problemId }: CodeProps) {
     RE: 'Runtime Error',
   };
   const { username } = useAuth();
-
-  const getSampleCode = () => {
-    switch (language) {
-      case 'python':
-        return `def two_sum(nums, target):\n  # Your solution here\n  return [0, 0]`;
-      case 'go':
-        return `func twoSum(nums []int, target int) []int {\n  // Your solution here\n  return []int{0, 0}\n}`;
-      case 'rust':
-        return `fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {\n  // Your solution here\n  vec![0, 0]\n}`;
-      case 'cpp':
-        return `std::vector<int> twoSum(std::vector<int>& nums, int target) {\n  // Your solution here\n  return {0, 0};\n}`;
-      default:
-        return `// Write your solution for ${language} here`;
-    }
-  };
-
-  useEffect(() => {
-    setCode(getSampleCode());
-  }, [language]);
 
   const handleEditorChange = (newValue: string | undefined) => {
     if (newValue !== undefined) {
