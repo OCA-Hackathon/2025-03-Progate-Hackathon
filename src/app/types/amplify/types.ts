@@ -1,4 +1,4 @@
 export interface AuthConfig {
-    userPoolId: string;
-    userPoolClientId: string;
-  }
+  userPoolId: string;
+  userPoolClientId: string;
+}

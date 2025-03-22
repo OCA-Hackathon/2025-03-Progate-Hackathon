@@ -23,21 +23,10 @@ interface Result {
   message?: string;
 }
 
-interface LoadingMessageUpdater {
-  (message: string): void;
-}
-
-interface LoadingStep {
-  stepId: string;
-}
-
-
 export default function Code({ problemId }: CodeProps) {
   const [language, setLanguage] = useState('go');
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
-  const [loadingMessage, setLoadingMessage] = useState('');
-  const [currentStep, setCurrentStep] = useState('');
   const [result, setResult] = useState<Result | null>(null);
   const statusMap = {
     AC: 'Accepted',
@@ -62,13 +51,6 @@ export default function Code({ problemId }: CodeProps) {
     }
   };
 
-  const updateLoadingStep = (stepId: LoadingStep['stepId']) => {
-    setCurrentStep(stepId);
-  };
-  const updateLoadingMessage: LoadingMessageUpdater = (message) => {
-    setLoadingMessage(message);
-  };
-
   useEffect(() => {
     setCode(getSampleCode());
   }, [language]);
@@ -81,9 +63,6 @@ export default function Code({ problemId }: CodeProps) {
 
   const handleSubmit = async () => {
     setLoading(true);
-
-    updateLoadingStep('results');
-    updateLoadingMessage('Processing...');
 
     // upload code to S3
     try {
@@ -104,12 +83,11 @@ export default function Code({ problemId }: CodeProps) {
       } else {
         console.log('Error submitting code with SQS');
       }
-    } catch (error) {
+    } catch {
       console.log('Error submitting code');
       setLoading(false);
     }
   
-    // poll for results
     try{
       const response = await fetch('/api/result', {
         method: 'POST',
@@ -131,20 +109,12 @@ export default function Code({ problemId }: CodeProps) {
       } else {
         console.log('Error fetching results');
       }
-    } catch (error) {
+    } catch {
       console.log('Error fetching results');
       setLoading(false);
     }
     setLoading(false);
   };
-
-
-  interface StartResultPollingParams {
-    bucket: string;
-    userId: string;
-    problemId: string;
-    timestamp: number;
-  }
 
   return (
     <div className="w-1/2 flex flex-col bg-primary rounded-br-lg rounded-tr-lg p-4">

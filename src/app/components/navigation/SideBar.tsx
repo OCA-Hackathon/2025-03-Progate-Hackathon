@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, Home, Settings, Trophy, Crosshair, Flag } from "lucide-react";
@@ -15,7 +16,7 @@ const menuItems = [
 ];
 
 export default function Sidebar() {
-  const { isLogin, username } = useAuth();
+  const { isLogin } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   if (!isLogin) return null;
@@ -33,10 +34,10 @@ export default function Sidebar() {
         initial={{ x: "-100%" }}
         animate={{ x: isOpen ? "0%" : "-100%" }}
         transition={{ type: "tween", duration: 0.3 }}
-        className="fixed top-0 left-0 w-64 h-full bg-[#252525] text-white shadow-lg p-6 flex flex-col z-1"
+        className="fixed top-0 left-0 w-72 h-full bg-[#252525] text-white shadow-lg p-6 flex flex-col z-1"
       >
         {/* 閉じるボタン */}
-        <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <button onClick={() => setIsOpen(false)} className="absolute top-4 right-6 text-gray-400 hover:text-white">
           <X size={24} />
         </button>
 
@@ -54,7 +55,7 @@ export default function Sidebar() {
                 router.push(path);
                 setIsOpen(false);
               }}
-              className="group flex items-center space-x-3 w-full p-3 hover:bg-primary rounded-lg  transition"
+              className="group flex items-center space-x-3 w-5/6 p-3 hover:bg-primary rounded-lg  transition"
             >
             <Icon size={24} />
 

@@ -24,7 +24,6 @@ const handleLogin = async () => {
         // console.log("User:", user);
         // console.log("Session:", session);
         const accessToken = session.tokens?.accessToken?.toString();
-        const idToken = session.tokens?.idToken?.toString();
         // console.log("idToken:", idToken);
         // console.log("accessToken:", accessToken);
         if (accessToken) {
@@ -92,7 +91,7 @@ const handleLogin = async () => {
   </div>
 
   <div className="mt-8 pt-6 border-t border-[#333333] text-center text-gray-400 text-sm">
-    Don't have an account? <a href="/register" className="text-purple-400 hover:text-purple-300 transition-colors duration-300">Register</a>
+    Don&apos;t have an account? <a href="/register" className="text-purple-400 hover:text-purple-300 transition-colors duration-300">Register</a>
   </div>
 </div>
 </div>

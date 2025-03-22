@@ -28,7 +28,7 @@ const getRank = (score: number) => {
 
 export default function RankingPage({ setUserRank }: { setUserRank: (rank: string) => void }) {
   const chartRef = useRef<HTMLDivElement>(null);
-  const [score, setScore] = useState(userScores[userScores.length - 1].score);
+  const score = useState(userScores[userScores.length - 1].score);
   const latestScore = userScores[userScores.length - 1].score;
   const userRank = getRank(latestScore);
 
