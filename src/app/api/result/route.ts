@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { S3Client, ListObjectsV2Command, GetObjectCommand } from "@aws-sdk/client-s3";
+import { Readable } from "stream";
 
 const client = new S3Client({
     region: process.env.HACKATHON_AWS_DEFAULT_REGION || "",
@@ -12,7 +13,7 @@ const client = new S3Client({
 const S3_BUCKET_NAME = process.env.HACKATHON_S3_BUCKET_NAME || "";
 
 // S3 のレスポンス Body → string に変換
-async function streamToString(stream: any): Promise<string> {
+async function streamToString(stream: Readable): Promise<string> {
   const chunks: Uint8Array[] = [];
   for await (const chunk of stream) {
     chunks.push(chunk);
@@ -60,7 +61,10 @@ export async function POST(req: NextRequest) {
             Key: latestFile.Key!,
           });
           const getResponse = await client.send(getCommand);
-          const bodyString = await streamToString(getResponse.Body);
+          if (!getResponse.Body) {
+            throw new Error("Response body is undefined");
+          }
+          const bodyString = await streamToString(getResponse.Body as Readable);
 
           const result = JSON.parse(bodyString || "{}");
           console.log("Parsed result:", result);
