@@ -3,7 +3,7 @@ import Button from "@/app/components/ui/Button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { fetchAuthSession, signIn, signOut } from "aws-amplify/auth";
-import setCookieUseCase from "@/app/usecase/cookie/cookie";
+import setCookieUseCase from "@/app/usecase/cookie/setCookie";
 
 export default function LoginForm() {
 
@@ -36,7 +36,8 @@ const handleLogin = async () => {
         //     body: JSON.stringify({ accessToken }),
         //   credentials: "include",
         //   });
-          await setCookieUseCase({ name: "accessToken", token: accessToken, maxAge: 60 * 60 });
+          const tmp = await setCookieUseCase({ name: "accessToken", token: accessToken, maxAge: 60 * 60 });
+          console.log("Cookie set:", tmp);
         } else {
           console.log("Tokens are undefined");
         }
