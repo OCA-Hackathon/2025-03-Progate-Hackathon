@@ -1,4 +1,4 @@
-import Contents from "./components/Contents";
+import Contents from "@/feature/home/Contents";
 
 export default function Home() {
   return (
