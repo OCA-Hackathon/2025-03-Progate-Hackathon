@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Button from "@/app/components/ui/Button";
+import Button from "@/components/ui/Button";
 import { useAuth } from "@/contexts/auth/useAuth";
 import Editor from "@monaco-editor/react";
 

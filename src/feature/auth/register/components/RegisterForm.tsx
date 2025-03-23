@@ -1,5 +1,5 @@
 "use client";
-import Button from "@/app/components/ui/Button";
+import Button from "@/components/ui/Button";
 import { useState } from "react";
 import { signUp } from "aws-amplify/auth";
 

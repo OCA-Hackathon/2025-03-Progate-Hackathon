@@ -1,5 +1,5 @@
 "use client";
-import Button from "@/app/components/ui/Button";
+import Button from "@/components/ui/Button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { fetchAuthSession, signIn, signOut } from "aws-amplify/auth";
