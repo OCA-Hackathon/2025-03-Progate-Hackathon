@@ -1,5 +1,5 @@
 "use client";
-import "@/app/config/amplify/AmplifyConf";
+import "@/config/amplify/AmplifyConf";
 import { useAuth } from "@/app/config/amplify/AuthProvider";
 import { Crosshair, Flag, Shield, CircleHelp, Skull, ShieldAlert, Flame, Swords, Medal, ScrollText, Hammer } from "lucide-react";
 import Chart from "@/app/home/components/Chart";
