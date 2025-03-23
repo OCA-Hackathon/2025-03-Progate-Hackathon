@@ -6,7 +6,7 @@ if (!ENCRYPTION_KEY) {
 }
 const KEY_BUFFER = Buffer.from(ENCRYPTION_KEY.padEnd(32, "0").slice(0, 32));
 
-export function decrypt(text: string): string {
+export function decrypt(text: string): string|null {
   try {
     // ✅ `iv` と `encryptedData` を分離
     const [ivHex, encryptedData] = text.split(":");
@@ -25,6 +25,6 @@ export function decrypt(text: string): string {
     return decrypted;
   } catch (error) {
     console.error("Decryption Error:", error);
-    throw new Error("Decryption failed");
+    return null;
   }
 }
