@@ -11,7 +11,7 @@ export function decrypt(text: string): string|null {
     // ✅ `iv` と `encryptedData` を分離
     const [ivHex, encryptedData] = text.split(":");
     if (!ivHex || !encryptedData) {
-      throw new Error("Invalid encrypted text format");
+      return null;
     }
 
     // ✅ `iv` を `Buffer` に変換
