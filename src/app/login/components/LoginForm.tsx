@@ -15,15 +15,18 @@ const handleLogin = async () => {
     try {
       await signOut();
       const { nextStep } = await signIn({ username, password });
-      // console.log("Next step:", nextStep);
+      console.log("Next step:", nextStep);
+      
       if (nextStep.signInStep === "DONE") {
 
         // const user = await getCurrentUser();
         const session = await fetchAuthSession({ forceRefresh: true });
+        console.log("Session:", session);
 
         // console.log("User:", user);
         // console.log("Session:", session);
         const accessToken = session.tokens?.accessToken?.toString();
+        console.log("accessToken:", accessToken);
         // console.log("idToken:", idToken);
         // console.log("accessToken:", accessToken);
         if (accessToken) {
