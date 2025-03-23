@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Button from "@/app/components/ui/Button";
-import { useAuth } from "@/app/config/amplify/AuthProvider";
+import { useAuth } from "@/contexts/auth/useAuth";
 import Editor from "@monaco-editor/react";
 
 interface CodeProps {

@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { signOut } from "aws-amplify/auth";
 import { useRouter } from "next/navigation";
 import { Bell, User } from "lucide-react";
-import { useAuth } from "@/app/config/amplify/AuthProvider";
+import { useAuth } from "@/contexts/auth/useAuth";
 
 export default function ProfileMenu() {
   const router = useRouter();
