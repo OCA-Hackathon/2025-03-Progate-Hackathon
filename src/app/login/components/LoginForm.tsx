@@ -35,7 +35,7 @@ const handleLogin = async () => {
           //   // body: JSON.stringify({ name: "accessToken", token: accessToken, maxAge: 24 * 60 * 60 }),
           //   body: JSON.stringify({ accessToken }),
           // });
-          await setCookieUseCase({ name: "accessToken", value: accessToken, maxAge: 60 * 60 });
+          await setCookieUseCase({ name: "accessToken", token: accessToken, maxAge: 60 * 60 });
         } else {
           console.log("Tokens are undefined");
         }
