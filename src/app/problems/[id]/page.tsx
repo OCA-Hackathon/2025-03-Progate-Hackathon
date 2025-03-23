@@ -1,7 +1,7 @@
 "use client";
 import { useParams } from "next/navigation";
-import Code from "@/app/problems/components/Code";
-import ProblemDetail from "@/app/problems/components/ProblemDetail";
+import Code from "@/feature/problems/components/Code";
+import ProblemDetail from "@/feature/problems/components/ProblemDetail";
 
 export default function ProblemPage() {
   const params = useParams();

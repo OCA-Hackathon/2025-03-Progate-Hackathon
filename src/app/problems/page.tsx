@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Crosshair } from "lucide-react";
-import RatingBadge from "@/app/problems/components//RatingBadge";
+import RatingBadge from "@/feature/problems/components/RatingBadge";
 
 interface Problem {
   id: string;
