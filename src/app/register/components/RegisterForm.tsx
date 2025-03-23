@@ -2,7 +2,6 @@
 import Button from "@/app/components/ui/Button";
 import { useState } from "react";
 import { signUp } from "aws-amplify/auth";
-import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {
 
