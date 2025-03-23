@@ -26,6 +26,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       // });
       // const data = await response.json();
       const accessToken = await GetCookieUseCase({ name: "accessToken" });
+      if (accessToken==null) {
+        setIsLogin(false);
+        return;
+      }
       setIsLogin(true);
       const decodedToken = jwt.decode(accessToken);
       // console.log("Decoded token:", decodedToken);
