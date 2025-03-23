@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, ReactNode } from "react";
 import { configureAmplify } from "@/config/amplify/AmplifyConf";
-import { AuthConfig } from "@/app/types/amplify/types";
+import { AuthConfig } from "@/types/amplify/types";
 
 interface ClientProviderProps {
   authConfig: AuthConfig;

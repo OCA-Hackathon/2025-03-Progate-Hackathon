@@ -1,4 +1,4 @@
-import { Amplify } from "aws-amplify";import { AuthConfig } from "@/app/types/amplify/types";
+import { Amplify } from "aws-amplify";import { AuthConfig } from "@/types/amplify/types";
 
 export function configureAmplify(authConfig: AuthConfig) {
   Amplify.configure({
