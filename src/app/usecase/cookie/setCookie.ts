@@ -21,4 +21,5 @@ export default async function setCookieUseCase({ name, token, maxAge }: SetCooki
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax"
   });
+  return value;
 }
