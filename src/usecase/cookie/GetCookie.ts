@@ -1,6 +1,6 @@
 "use server"
 import { cookies } from "next/headers";
-import { decrypt } from "@/app/usecase/crypto/decrypt";
+import { decrypt } from "@/usecase/crypto/decrypt";
 
 
 interface GetCookieUseCaseProps {

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { encrypt } from "@/app/usecase/crypto/encrypt";
+import { encrypt } from "@/usecase/crypto/encrypt";
 import { cookies } from "next/headers";
 
 export async function POST(req: NextRequest) {

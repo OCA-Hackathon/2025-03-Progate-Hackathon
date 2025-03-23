@@ -2,7 +2,7 @@
 import { usePathname } from "next/navigation";
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import jwt from "jsonwebtoken";
-import GetCookieUseCase from "@/app/usecase/cookie/GetCookie";
+import GetCookieUseCase from "@/usecase/cookie/getCookie";
 
 interface AuthContextType {
   isLogin: boolean | null;
