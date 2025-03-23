@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { Crosshair } from "lucide-react";
 import RatingBadge from "@/feature/problems/components/RatingBadge";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'problems',
+};
 
 interface Problem {
   id: string;
