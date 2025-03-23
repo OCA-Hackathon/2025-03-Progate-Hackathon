@@ -3,10 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Header from "@/feature/header/components/Header";
 import Footer from "@/feature/footer/Footer";
 import "./globals.css";
-import ClientProvider from "@/app/config/amplify/ClientProvider";
-import { configureAmplify } from "@/app/config/amplify/AmplifyConf";
-import { AuthConfig } from "@/app/types/amplify/types";
-import { AuthProvider } from "@/app/config/amplify/AuthProvider";
+import ClientProvider from "@/config/amplify/ClientProvider";
+import { configureAmplify } from "@/config/amplify/AmplifyConf";
+import { AuthConfig } from "@/types/amplify/types";
+import { AuthProvider } from "@/contexts/auth/useAuth";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

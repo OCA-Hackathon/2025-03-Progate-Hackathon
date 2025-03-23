@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { useAuth } from "@/app/config/amplify/AuthProvider";
+import { useAuth } from "@/contexts/auth/useAuth";
 import SidebarMenu from "@/feature/header/components/navigation/SidebarMenu";
 
 export default function Sidebar() {
