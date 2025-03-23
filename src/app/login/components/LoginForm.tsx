@@ -3,7 +3,7 @@ import Button from "@/app/components/ui/Button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { fetchAuthSession, signIn, signOut } from "aws-amplify/auth";
-import setCookieUseCase from "@/app/usecase/cookie/cookie";
+// import setCookieUseCase from "@/app/usecase/cookie/cookie";
 
 export default function LoginForm() {
 
