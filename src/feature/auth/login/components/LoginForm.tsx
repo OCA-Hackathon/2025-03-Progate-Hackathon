@@ -12,7 +12,7 @@ export default function LoginForm() {
   const [message, setMessage] = useState("");
   const router = useRouter();
 
-const handleLogin = async () => {
+  const handleLogin = async () => {
     try {
       await signOut();
       const { nextStep } = await signIn({ username, password });
