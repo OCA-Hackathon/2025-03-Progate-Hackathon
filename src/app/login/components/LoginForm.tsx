@@ -3,6 +3,7 @@ import Button from "@/app/components/ui/Button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { fetchAuthSession, signIn, signOut } from "aws-amplify/auth";
+import setCookieUseCase from "@/app/usecase/cookie/cookie";
 
 export default function LoginForm() {
 
@@ -16,26 +17,25 @@ const handleLogin = async () => {
       await signOut();
       const { nextStep } = await signIn({ username, password });
       console.log("Next step:", nextStep);
-      
+
       if (nextStep.signInStep === "DONE") {
 
         // const user = await getCurrentUser();
         const session = await fetchAuthSession({ forceRefresh: true });
-        console.log("Session:", session);
 
         // console.log("User:", user);
         // console.log("Session:", session);
         const accessToken = session.tokens?.accessToken?.toString();
-        console.log("accessToken:", accessToken);
         // console.log("idToken:", idToken);
         // console.log("accessToken:", accessToken);
         if (accessToken) {
-          await fetch("/api/auth/post", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            // body: JSON.stringify({ name: "accessToken", token: accessToken, maxAge: 24 * 60 * 60 }),
-            body: JSON.stringify({ accessToken }),
-          });
+          // await fetch("/api/auth/post", {
+          //   method: "POST",
+          //   headers: { "Content-Type": "application/json" },
+          //   // body: JSON.stringify({ name: "accessToken", token: accessToken, maxAge: 24 * 60 * 60 }),
+          //   body: JSON.stringify({ accessToken }),
+          // });
+          await setCookieUseCase({ name: "accessToken", value: accessToken, maxAge: 60 * 60 });
         } else {
           console.log("Tokens are undefined");
         }
