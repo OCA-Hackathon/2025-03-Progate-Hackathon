@@ -33,6 +33,7 @@ const handleLogin = async () => {
           await fetch("/api/auth/post", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
+            // body: JSON.stringify({ name: "accessToken", token: accessToken, maxAge: 24 * 60 * 60 }),
             body: JSON.stringify({ accessToken }),
           });
         } else {
