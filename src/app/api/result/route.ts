@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
 
     let attempts = 0;
     const maxAttempts = 5;
-    console.log("Request:", { username, problemId });
+    // console.log("Request:", { username, problemId });
 
     const input = {
       Bucket: S3_BUCKET_NAME,

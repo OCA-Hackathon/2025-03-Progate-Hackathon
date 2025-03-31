@@ -27,7 +27,11 @@ export default function Code({ problemId }: CodeProps) {
   const [language, setLanguage] = useState('go');
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
+  const [gptLoading, setGptLoading] = useState(false);
   const [result, setResult] = useState<Result | null>(null);
+  const [messages, setMessages] = useState<any[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const statusMap = {
     AC: 'Accepted',
     WA: 'Wrong Answer',
@@ -42,11 +46,38 @@ export default function Code({ problemId }: CodeProps) {
     }
   };
 
+  const sendMessage = async () => {
+    setGptLoading(true);
+
+
+    // const newMessages = [...messages, { role: 'user', content: code }];
+    // setMessages(newMessages);
+    // console.log(typeof newMessages);
+    // console.log(typeof code);
+    // console.log('newMessages:', newMessages);
+
+    const res = await fetch('/api/gpt', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ problem: "2つの整数が与えられるので、それらの合計を求めて出力してください、という問題に対して私のコードを100点満点で採点してください。ユーザーの提出したコードは以下のとおりです。",messages: code, lang: language }),
+    });
+
+    const data = await res.json();
+    // console.log('data:', data);
+
+    if (data.choices) {
+      setMessages([data.choices[0].message]);
+      setIsModalOpen(true);
+    }
+    setGptLoading(false);
+  };
+
+
   const handleSubmit = async () => {
     setLoading(true);
 
     // upload code to S3
-    try {
+    try {;
       const response = await fetch('/api/upload', {
         method: 'POST',
         headers: {
@@ -68,7 +99,7 @@ export default function Code({ problemId }: CodeProps) {
       console.log('Error submitting code');
       setLoading(false);
     }
-  
+
     try{
       const response = await fetch('/api/result', {
         method: 'POST',
@@ -83,7 +114,7 @@ export default function Code({ problemId }: CodeProps) {
       if (response.ok) {
         console.log('Fetching results successfully');
         const data = await response.json();
-        console.log('Data:', data);
+        // console.log('Data:', data);
         const result = data.result;
         setResult(result);
         console.log('Result:', result);
@@ -168,7 +199,37 @@ export default function Code({ problemId }: CodeProps) {
     ) : (
       "SUBMIT"
     )}
-</Button>
+    </Button>
+
+    <Button onClick={sendMessage} disabled={gptLoading}>
+      {gptLoading ? (
+        <div className="flex items-center space-x-2">
+          <svg
+            className="animate-spin h-4 w-4 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+          <span>Processing...</span>
+        </div>
+      ) : (
+        "Code Reivew"
+      )}
+    </Button>
 
     </div>
 
@@ -223,6 +284,27 @@ export default function Code({ problemId }: CodeProps) {
           </div>
         </div>
       )}
+
+
+    {isModalOpen && (
+      <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
+        <div className="bg-[#252525] p-6 rounded-lg max-w-xl w-full">
+          <h2 className="text-lg font-semibold text-white mb-4">ChatGPT's Code Review</h2>
+          <div className="text-sm text-gray-200 whitespace-pre-line">
+            {messages.length > 0 && messages[0].content}
+          </div>
+          <div className="mt-4 text-right">
+            <button
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+              onClick={() => setIsModalOpen(false)}
+            >
+              close
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
+
     </div>
     );
 }
